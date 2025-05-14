@@ -41,6 +41,16 @@ namespace ScoreTimer
             _scoreTimerLogic.CountEnded -= OnCountEnded;
         }
 
+        private void Update()
+        {
+            if (_scoreTimerViewObject.gameObject.activeSelf)
+            {
+                _worldPos = _player.position + _offset;
+                _screenPos = Camera.main.WorldToScreenPoint(_worldPos);
+                _scoreTimerViewObject.transform.position = _screenPos;
+            }
+        }
+
         private void OnTimerChanged(int timer)
         {
             _timer = timer;
@@ -63,16 +73,8 @@ namespace ScoreTimer
         private void OnCountEnded()
         {
             if (_scoreTimerViewObject != null)
-                _scoreTimerViewObject.gameObject.SetActive(false);
-        }
-
-        private void Update()
-        {
-            if (_scoreTimerViewObject.gameObject.activeSelf)
             {
-                _worldPos = _player.position + _offset;
-                _screenPos = Camera.main.WorldToScreenPoint(_worldPos);
-                _scoreTimerViewObject.transform.position = _screenPos;
+                _scoreTimerViewObject.gameObject.SetActive(false);
             }
         }
     }

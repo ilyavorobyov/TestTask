@@ -53,20 +53,6 @@ namespace ScoreTimer
             }
         }
 
-        private void OnFound(IInteractable interactable)
-        {
-            _currentObject = interactable;
-            StopCount();
-            _isCounting = true;
-            _countTimer = StartCoroutine(TrySearch());
-            CountStarted?.Invoke(_currentObject.GetPosition(), _rewardDelay);
-        }
-
-        private void OnLost()
-        {
-            StopCount();
-        }
-
         private void AddScore()
         {
             _hideObjectEffect.Play(_currentObject.GetPosition());
@@ -89,6 +75,20 @@ namespace ScoreTimer
             }
 
             AddScore();
+            StopCount();
+        }
+
+        private void OnFound(IInteractable interactable)
+        {
+            _currentObject = interactable;
+            StopCount();
+            _isCounting = true;
+            _countTimer = StartCoroutine(TrySearch());
+            CountStarted?.Invoke(_currentObject.GetPosition(), _rewardDelay);
+        }
+
+        private void OnLost()
+        {
             StopCount();
         }
     }

@@ -11,7 +11,7 @@ namespace Spawners
 
         [SerializeField] private Transform _startPoint;
         [SerializeField] private Transform _targetPoint;
-        [SerializeField] private BoyMover _boy;
+        [SerializeField] private BoyAnimatorController _boy;
 
         private void OnEnable()
         {
@@ -25,10 +25,10 @@ namespace Spawners
 
         private void OnScoreAdded()
         {
-/*            BoyMover boy = Instantiate(_boy,
+            BoyAnimatorController boy = Instantiate(_boy,
                 _startPoint.position,
-                Quaternion.identity);
-            boy.Init(_targetPoint.transform);*/
+                transform.rotation);
+            boy.Init(_targetPoint.transform);
         }
     }
 }
