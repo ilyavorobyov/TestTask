@@ -5,6 +5,8 @@ namespace BoyCharacter
     [RequireComponent(typeof(Animator))]
     public class BoyAnimator : MonoBehaviour
     {
+        private enum AnimationState { Idle, Run, Dance }
+
         private const string Idle = nameof(Idle);
         private const string Run = nameof(Run);
         private const string Dance = nameof(Dance);
@@ -14,46 +16,39 @@ namespace BoyCharacter
         private readonly int _danceAnimationHash = Animator.StringToHash(nameof(Dance));
 
         private Animator _animator;
-        private bool _isIdle = false;
-        private bool _isRunning = false;
-        private bool _isDancing = false;
+        private AnimationState _currentState;
 
         private void Awake()
         {
             _animator = GetComponent<Animator>();
+            _currentState = AnimationState.Idle;
         }
 
         public void PlayIdleAnimation()
         {
-            if (!_isIdle)
-            {
-                _animator.SetTrigger(_idleAnimationHash);
-                _isIdle = true;
-                _isRunning = false;
-                _isDancing = false;
-            }
+            if (_currentState == AnimationState.Idle)
+                return;
+
+            _animator.SetTrigger(_idleAnimationHash);
+            _currentState = AnimationState.Idle;
         }
 
         public void PlayRunAnimation()
         {
-            if (_isIdle || _isDancing)
-            {
-                _animator.SetTrigger(_runAnimationHash);
-                _isIdle = false;
-                _isRunning = true;
-                _isDancing = false;
-            }
+            if (_currentState == AnimationState.Run)
+                return;
+
+            _animator.SetTrigger(_runAnimationHash);
+            _currentState = AnimationState.Run;
         }
 
         public void PlayDanceAnimation()
         {
-            if (_isRunning || _isIdle)
-            {
-                _animator.SetTrigger(_danceAnimationHash);
-                _isIdle = false;
-                _isRunning = false;
-                _isDancing = true;
-            }
+            if (_currentState == AnimationState.Dance)
+                return;
+
+            _animator.SetTrigger(_danceAnimationHash);
+            _currentState = AnimationState.Dance;
         }
     }
 }

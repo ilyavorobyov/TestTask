@@ -1,12 +1,11 @@
 using ScoreTimer;
 using UnityEngine;
-using Zenject;
 
 namespace Graph
 {
     public class GraphUpdater : MonoBehaviour
     {
-        [Inject] private ScoreTimerLogic _scoreTimerLogic;
+        [SerializeField] private ScoreTimerLogic _scoreTimerLogic;
 
         private void OnEnable()
         {

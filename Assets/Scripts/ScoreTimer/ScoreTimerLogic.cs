@@ -5,15 +5,14 @@ using Particles;
 using PlayerCharacter;
 using UniRx;
 using UnityEngine;
-using Zenject;
 
 namespace ScoreTimer
 {
     public class ScoreTimerLogic : MonoBehaviour
     {
-        [Inject] private PlayerInteractableDetector _playerInteractableDetector;
-        [Inject] private HideObjectEffect _hideObjectEffect;
-        [Inject] private ScoreTimerView _scoreTimerView;
+        [SerializeField] private PlayerInteractableDetector _playerInteractableDetector;
+        [SerializeField] private ParticlesEffect _hideObjectEffect;
+        [SerializeField] private ScoreTimerView _scoreTimerView;
 
         private int _rewardDelay = 3;
         private int _iterationTime = 1;

@@ -1,4 +1,5 @@
 using System.Collections;
+using Particles;
 using Pathfinding;
 using UnityEngine;
 
@@ -14,6 +15,7 @@ namespace BoyCharacter
         private AIPath _path;
         private Coroutine _controlAnimator;
         private BoyAnimator _animator;
+        private ParticlesEffect _boyEffect;
 
         private void Awake()
         {
@@ -26,13 +28,15 @@ namespace BoyCharacter
             StopControl();
         }
 
-        public void Init(Transform target)
+        public void Init(Transform target,
+            ParticlesEffect boyEffect)
         {
             if (_path != null)
             {
                 _target = target.transform.position;
                 StopControl();
                 _controlAnimator = StartCoroutine(ControlAnimator());
+                _boyEffect = boyEffect;
             }
         }
 
@@ -56,6 +60,7 @@ namespace BoyCharacter
             _animator.PlayDanceAnimation();
             yield return waitForSecondsDance;
             StopControl();
+            _boyEffect.Play(gameObject.transform.position);
             Destroy(gameObject);
         }
     }

@@ -2,15 +2,13 @@ using TMPro;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
-using Zenject;
 
 namespace ScoreTimer
 {
     public class ScoreTimerView : MonoBehaviour
     {
-        [Inject] private ScoreTimerViewObject _scoreTimerViewObject;
-        [Inject] private ScoreTimerLogic _scoreTimerLogic;
-
+        [SerializeField] private ScoreTimerViewObject _scoreTimerViewObject;
+        [SerializeField] private ScoreTimerLogic _scoreTimerLogic;
         [SerializeField] private TMP_Text _rewardDelayText;
         [SerializeField] private TMP_Text _currentTimeText;
         [SerializeField] private Image _scoreTimerFilling;

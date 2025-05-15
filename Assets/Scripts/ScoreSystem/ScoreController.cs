@@ -1,14 +1,12 @@
 using ScoreTimer;
 using TMPro;
 using UnityEngine;
-using Zenject;
 
 namespace ScoreSystem
 {
     public class ScoreController : MonoBehaviour
     {
-        [Inject] private ScoreTimerLogic _scoreTimerLogic;
-
+        [SerializeField] private ScoreTimerLogic _scoreTimerLogic;
         [SerializeField] private TMP_Text _scoreText;
         [SerializeField] private AudioSource _addScoreSound;
 
